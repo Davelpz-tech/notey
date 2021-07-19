@@ -1,11 +1,11 @@
 const path = require('path');
 const fs = require('fs');
 const router = require('express').Router();
-const uuid = require('uuid');
+const UUID = require('uuid');
 
-router.get('/notes', (req, res) => {
+router.get('/api/notes', (req, res) => {
     fs.readFile('./Develop/db/db.json', 'UTF8', (err, data) => {
-        const note_data = JSON.parse(data);
+        let note_data = JSON.parse(data);
         res.send(note_data);
         if (err) {
             console.log(err)
@@ -13,22 +13,18 @@ router.get('/notes', (req, res) => {
     });
 })
 
-router.post('/notes', (req, res) => {
-    const { body } = req;
+router.post('/api/notes', (req, res) => {
+    req.body.id = UUID.v1();
 
     fs.readFile('./Develop/db/db.json', 'UTF8', (err, data) => {
-        const note_data = JSON.parse(data);
-        note_data.push(body);
-        body.id = uuid();
-        res.send(note_data);
-        if (err) {
-            console.log(err)
-        }
+        let note_data = JSON.parse(data);
+        note_data.push(req.body);
 
-        fs.writeFile('./Develop/db/db.json', JSON.stringify(note_data), err => {
+        fs.writeFile('./Develop/db/db.json', JSON.stringify(note_data), (err) => {
             if (err) {
                 res.status(500).send(err);
             }
+            res.json(req.body);
         });
     });
 });
