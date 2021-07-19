@@ -9,7 +9,7 @@
 #### The program initializes with a front end design that prompts you to 'get started'. Afterwards you will be redirected to a new page /notes. Here you can save create new notes and save them.
 
 ### Insomnia showing successful post
-![Alt text](./Develop/public/assets/images/capture.PNG)
+![Alt text](./Develop/public/assets/images/Capture.PNG)
 
 ### Heroku Deployed Application
 ![Alt text](./Develop/public/assets/images/insomnia-post.PNG)
